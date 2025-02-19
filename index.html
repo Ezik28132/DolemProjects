@@ -10,9 +10,11 @@
             background-color: #f0f8ff;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
+            padding-top: 50px;
         }
         .container {
             text-align: center;
@@ -30,14 +32,38 @@
         button:hover {
             background-color: #ffb6c1;
         }
+        .rectangle {
+            display: none;
+            width: 200px;
+            height: 300px;
+            margin-top: 20px;
+            background-color: #f3a7b5;
+            border-radius: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <button onclick="alert('DolemOs seleccionado')">DolemOs</button>
-        <button onclick="alert('Optimizaciones seleccionadas')">Optimizaciones</button>
+        <button onclick="mostrarRectangulo('DolemOs')">DolemOs</button>
+        <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
+
+        <div id="rectangulo" class="rectangle">
+            <p id="mensaje" style="text-align:center; margin-top: 50%;">Haz clic en un botón</p>
+        </div>
     </div>
+
+    <script>
+        function mostrarRectangulo(categoria) {
+            var rectangulo = document.getElementById('rectangulo');
+            var mensaje = document.getElementById('mensaje');
+            rectangulo.style.display = 'block';
+            mensaje.innerText = categoria + ' seleccionado';
+        }
+    </script>
 
 </body>
 </html>
