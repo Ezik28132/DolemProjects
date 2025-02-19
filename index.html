@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DolemOptimizations Web</title>
+    <title>Interfaz Linda</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,7 +34,7 @@
         }
         .rectangle {
             display: none;
-            width: 200px;
+            width: 250px;
             height: 300px;
             margin-top: 20px;
             background-color: #f3a7b5;
@@ -42,6 +42,32 @@
             margin-left: auto;
             margin-right: auto;
             padding: 10px;
+            text-align: center;
+        }
+        .download-button {
+            display: none;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        .inner-button {
+            background-color: #add8e6;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 5px;
+        }
+        .inner-button:hover {
+            background-color: #87cefa;
         }
     </style>
 </head>
@@ -52,16 +78,68 @@
         <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
 
         <div id="rectangulo" class="rectangle">
-            <p id="mensaje" style="text-align:center; margin-top: 50%;">Haz clic en un botón</p>
+            <div id="buttons-container">
+                <!-- Los botones se añadirán dinámicamente aquí -->
+            </div>
+            <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
         </div>
     </div>
 
     <script>
         function mostrarRectangulo(categoria) {
             var rectangulo = document.getElementById('rectangulo');
-            var mensaje = document.getElementById('mensaje');
+            var buttonsContainer = document.getElementById('buttons-container');
+            var downloadBtn = document.getElementById('downloadBtn');
+            
             rectangulo.style.display = 'block';
-            mensaje.innerText = categoria + ' seleccionado';
+            buttonsContainer.innerHTML = "";  // Limpiar los botones existentes
+
+            if (categoria === 'DolemOs') {
+                // Agregar los botones dentro de DolemOs
+                buttonsContainer.innerHTML = `
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10')">DolemOS 10</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10 LTSC')">DolemOS 10 LTSC</button>
+                `;
+            } else if (categoria === 'Optimizaciones') {
+                // Agregar el botón de Optimizaciones
+                buttonsContainer.innerHTML = `
+                    <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti')">Carpeta de Opti</button>
+                `;
+            }
+
+            // Ocultar el botón de descarga inicialmente
+            downloadBtn.style.display = 'none';
+        }
+
+        function seleccionarDescarga(categoria) {
+            var downloadBtn = document.getElementById('downloadBtn');
+            
+            // Configurar el enlace de descarga dependiendo de la categoría seleccionada
+            if (categoria === 'DolemOS 11') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://link-dolemos11.com';  // Reemplazar con el enlace real
+                };
+            } else if (categoria === 'DolemOS 10') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://link-dolemos10.com';  // Reemplazar con el enlace real
+                };
+            } else if (categoria === 'DolemOS 10 LTSC') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://link-dolemos10ltsc.com';  // Reemplazar con el enlace real
+                };
+            } else if (categoria === 'Carpeta de Opti') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://link-carpeta-opti.com';  // Reemplazar con el enlace real
+                };
+            }
+
+            // Mostrar el botón de descarga
+            downloadBtn.style.display = 'block';
+        }
+
+        function descargar() {
+            // Esta función ya está manejada en la lógica de seleccionarDescarga
         }
     </script>
 
