@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DolemOptimizations WebSite</title>
+    <title>DolemOptimization WebSite</title>
     <style>
         /* Estilos generales */
         body {
@@ -38,12 +38,18 @@
             color: #333;
         }
 
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
         button {
             background-color: #ffcccb;
             border: none;
             padding: 15px 30px;
             font-size: 18px;
-            margin: 10px;
             cursor: pointer;
             border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.2s;
@@ -55,7 +61,6 @@
         }
 
         .rectangle {
-            display: none;
             width: 100%;
             height: auto;
             margin-top: 20px;
@@ -98,24 +103,23 @@
             transform: scale(1.05);
         }
 
-        /* Estilo de los botones de categorías */
-        .category-buttons button {
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>Selecciona una Categoría</h1>
+        
+        <!-- Botones de categoría al lado -->
         <div class="category-buttons">
             <button onclick="mostrarRectangulo('DolemOs')">DolemOs</button>
             <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
         </div>
 
+        <!-- Rectángulo de selección, siempre visible -->
         <div id="rectangulo" class="rectangle">
             <div id="buttons-container">
-                <!-- Los botones se añadirán dinámicamente aquí -->
+                <!-- Los botones de DolemOs o Carpeta de Opti se añadirán aquí -->
             </div>
             <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
         </div>
@@ -127,18 +131,17 @@
             var buttonsContainer = document.getElementById('buttons-container');
             var downloadBtn = document.getElementById('downloadBtn');
             
-            rectangulo.style.display = 'block';
-            buttonsContainer.innerHTML = "";  // Limpiar los botones existentes
-
+            // Limpiar los botones existentes en el contenedor
+            buttonsContainer.innerHTML = "";
+            
+            // Mostrar los botones correspondientes según la categoría seleccionada
             if (categoria === 'DolemOs') {
-                // Agregar los botones dentro de DolemOs
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10')">DolemOS 10</button>
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10 LTSC')">DolemOS 10 LTSC</button>
                 `;
             } else if (categoria === 'Optimizaciones') {
-                // Agregar el botón de Optimizaciones
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti')">Carpeta de Opti</button>
                 `;
