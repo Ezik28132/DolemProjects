@@ -60,15 +60,31 @@
             transform: scale(1.05);
         }
 
-        .rectangle {
+        /* Rectángulo blanco que siempre está visible */
+        .rectangle-white {
             width: 100%;
             height: auto;
             margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Rectángulo rosa donde se mostrarán los botones */
+        .rectangle-rosa {
+            display: none;
+            width: 100%;
             background-color: #f3a7b5;
             border-radius: 10px;
             padding: 15px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
         .inner-button {
@@ -116,24 +132,30 @@
             <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
         </div>
 
-        <!-- Rectángulo de selección, siempre visible -->
-        <div id="rectangulo" class="rectangle">
-            <div id="buttons-container">
+        <!-- Rectángulo blanco que siempre está visible -->
+        <div class="rectangle-white">
+            <!-- Aquí aparecerán los botones correspondientes al seleccionar una categoría -->
+            <div id="buttons-container"></div>
+
+            <!-- Rectángulo rosa donde se colocarán los botones de DolemOs o Optimizaciones -->
+            <div id="rectangulo-rosa" class="rectangle-rosa">
                 <!-- Los botones de DolemOs o Carpeta de Opti se añadirán aquí -->
             </div>
+
             <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
         </div>
     </div>
 
     <script>
         function mostrarRectangulo(categoria) {
-            var rectangulo = document.getElementById('rectangulo');
+            var rectanguloRosa = document.getElementById('rectangulo-rosa');
             var buttonsContainer = document.getElementById('buttons-container');
             var downloadBtn = document.getElementById('downloadBtn');
             
             // Limpiar los botones existentes en el contenedor
             buttonsContainer.innerHTML = "";
-            
+            rectanguloRosa.style.display = 'none';  // Ocultar rectángulo rosa inicialmente
+
             // Mostrar los botones correspondientes según la categoría seleccionada
             if (categoria === 'DolemOs') {
                 buttonsContainer.innerHTML = `
@@ -147,12 +169,16 @@
                 `;
             }
 
+            // Mostrar el rectángulo rosa con los botones
+            rectanguloRosa.style.display = 'block';
+
             // Ocultar el botón de descarga inicialmente
             downloadBtn.style.display = 'none';
         }
 
         function seleccionarDescarga(categoria) {
             var downloadBtn = document.getElementById('downloadBtn');
+            var rectanguloRosa = document.getElementById('rectangulo-rosa');
             
             // Configurar el enlace de descarga dependiendo de la categoría seleccionada
             if (categoria === 'DolemOS 11') {
