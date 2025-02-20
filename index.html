@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dolem Optimization WebSite</title>
-
-    <!-- Favicon personalizado desde una URL -->
-    <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/x-icon">
-
+    <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png"> <!-- Logo en el título -->
     <style>
         /* Estilos generales */
         body {
@@ -20,7 +17,6 @@
             margin: 0;
             padding: 0;
             background-image: linear-gradient(to top left, #d0e6f5, #81cfe0);
-            position: relative; /* Para poder posicionar el botón en la esquina inferior izquierda */
         }
 
         .container {
@@ -30,6 +26,7 @@
             padding: 30px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 350px;
+            overflow: hidden;
         }
 
         h1 {
@@ -60,13 +57,35 @@
             transform: scale(1.05);
         }
 
-        /* Centrado de los botones dentro del contenedor */
-        .buttons-container {
+        /* Rectángulo blanco que siempre está visible */
+        .rectangle-white {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Rectángulo rosa que aparecerá con transición */
+        .rectangle-rosa {
+            display: none;
+            width: 100%;
+            background-color: #f3a7b5;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
         .inner-button {
@@ -101,28 +120,19 @@
             transform: scale(1.05);
         }
 
-        /* Estilos para el botón de Discord */
-        .discord-button {
-            position: absolute;
+        /* Botón Discord en la esquina inferior izquierda */
+        .discord-btn {
+            position: fixed;
             bottom: 20px;
             left: 20px;
-            background-color: #7289da;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png');
+            background-size: cover;
             border: none;
-            padding: 15px;
-            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.2s;
-        }
-
-        .discord-button:hover {
-            background-color: #5865f2;
-            transform: scale(1.1);
-        }
-
-        .discord-button img {
-            width: 30px; /* Tamaño del logo */
-            height: 30px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -133,30 +143,36 @@
         
         <!-- Botones de categoría al lado -->
         <div class="category-buttons">
-            <button onclick="mostrarBotones('DolemOs')">DolemOs</button>
-            <button onclick="mostrarBotones('Optimizaciones')">Optimizaciones</button>
+            <button onclick="mostrarRectangulo('DolemOs')">DolemOs</button>
+            <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
         </div>
 
-        <!-- Contenedor de botones centrado -->
-        <div class="buttons-container" id="buttons-container">
+        <!-- Rectángulo blanco que siempre está visible -->
+        <div class="rectangle-white">
             <!-- Aquí aparecerán los botones correspondientes al seleccionar una categoría -->
-        </div>
+            <div id="buttons-container"></div>
 
-        <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
+            <!-- Rectángulo rosa donde se colocarán los botones de DolemOs o Optimizaciones -->
+            <div id="rectangulo-rosa" class="rectangle-rosa">
+                <!-- Los botones de DolemOs o Carpeta de Opti se añadirán aquí -->
+            </div>
+
+            <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
+        </div>
     </div>
 
-    <!-- Botón de Discord -->
-    <button class="discord-button" onclick="window.open('https://discord.gg/sEt6N2aj', '_blank')">
-        <img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png" alt="Discord Logo">
-    </button>
+    <!-- Botón Discord -->
+    <button class="discord-btn" onclick="window.open('https://discord.gg/sEt6N2aj', '_blank')"></button>
 
     <script>
-        function mostrarBotones(categoria) {
+        function mostrarRectangulo(categoria) {
+            var rectanguloRosa = document.getElementById('rectangulo-rosa');
             var buttonsContainer = document.getElementById('buttons-container');
             var downloadBtn = document.getElementById('downloadBtn');
             
             // Limpiar los botones existentes en el contenedor
             buttonsContainer.innerHTML = "";
+            rectanguloRosa.style.display = 'none';  // Ocultar rectángulo rosa inicialmente
 
             // Mostrar los botones correspondientes según la categoría seleccionada
             if (categoria === 'DolemOs') {
@@ -171,12 +187,16 @@
                 `;
             }
 
-            // Mostrar el botón de descarga inicialmente
+            // Mostrar el rectángulo rosa con los botones
+            rectanguloRosa.style.display = 'block';
+
+            // Ocultar el botón de descarga inicialmente
             downloadBtn.style.display = 'none';
         }
 
         function seleccionarDescarga(categoria) {
             var downloadBtn = document.getElementById('downloadBtn');
+            var rectanguloRosa = document.getElementById('rectangulo-rosa');
             
             // Configurar el enlace de descarga dependiendo de la categoría seleccionada
             if (categoria === 'DolemOS 11') {
