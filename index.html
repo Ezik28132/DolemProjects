@@ -172,29 +172,23 @@
             
             // Limpiar los botones existentes en el contenedor
             buttonsContainer.innerHTML = "";
-            rectanguloRosa.style.opacity = '0';  // Fade out el rectángulo rosa
+            rectanguloRosa.style.display = 'none';  // Ocultar rectángulo rosa inicialmente
 
-            // Añadir transición a fade-in para el rectángulo rosa
-            setTimeout(function() {
-                // Mostrar los botones correspondientes según la categoría seleccionada
-                if (categoria === 'DolemOs') {
-                    buttonsContainer.innerHTML = `
-                        <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
-                        <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10')">DolemOS 10</button>
-                        <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10 LTSC')">DolemOS 10 LTSC</button>
-                    `;
-                } else if (categoria === 'Optimizaciones') {
-                    buttonsContainer.innerHTML = `
-                        <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti')">Carpeta de Opti</button>
-                    `;
-                }
+            // Mostrar los botones correspondientes según la categoría seleccionada
+            if (categoria === 'DolemOs') {
+                buttonsContainer.innerHTML = `
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10')">DolemOS 10</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10 LTSC')">DolemOS 10 LTSC</button>
+                `;
+            } else if (categoria === 'Optimizaciones') {
+                buttonsContainer.innerHTML = `
+                    <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti')">Carpeta de Opti</button>
+                `;
+            }
 
-                // Mostrar el rectángulo rosa con los botones
-                rectanguloRosa.style.display = 'block';
-                setTimeout(function() {
-                    rectanguloRosa.style.opacity = '1'; // Fade in el rectángulo rosa
-                }, 100);
-            }, 500); // Retardar por 500ms para dar tiempo al fade out
+            // Mostrar el rectángulo rosa con los botones
+            rectanguloRosa.style.display = 'block';
 
             // Ocultar el botón de descarga inicialmente
             downloadBtn.style.display = 'none';
