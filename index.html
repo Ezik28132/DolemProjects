@@ -23,30 +23,30 @@
             text-align: center;
             background-color: #ffffff;
             border-radius: 15px;
-            padding: 30px;
+            padding: 40px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            width: 450px;  /* Aumentado el tamaño del contenedor */
             overflow: hidden;
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 26px; /* Aumentado el tamaño del título */
+            margin-bottom: 30px;
             color: #333;
         }
 
         .category-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 20px;  /* Aumentado el espacio entre los botones */
+            margin-bottom: 30px;
         }
 
         button {
             background-color: #ffcccb;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 18px 35px; /* Aumentado el tamaño de los botones */
+            font-size: 20px;  /* Aumentado el tamaño del texto */
             cursor: pointer;
             border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.2s;
@@ -61,10 +61,10 @@
         .rectangle-white {
             width: 100%;
             height: auto;
-            margin-top: 20px;
+            margin-top: 30px;
             background-color: #ffffff;
             border-radius: 10px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -80,10 +80,10 @@
             width: 100%;
             background-color: #f3a7b5;
             border-radius: 10px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+            margin-top: 30px;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
@@ -91,11 +91,11 @@
         .inner-button {
             background-color: #add8e6;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 25px; /* Aumentado el tamaño de los botones internos */
+            font-size: 18px;  /* Aumentado el tamaño del texto */
             cursor: pointer;
             border-radius: 8px;
-            margin: 10px;
+            margin: 15px;
             transition: background-color 0.3s ease;
         }
 
@@ -107,11 +107,11 @@
             display: none;
             background-color: #007bff;
             color: white;
-            padding: 12px 30px;
+            padding: 16px 35px; /* Aumentado el tamaño del botón de descarga */
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px;  /* Aumentado el tamaño del texto */
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 30px;
             transition: background-color 0.3s ease, transform 0.2s;
         }
 
@@ -125,8 +125,8 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            width: 50px;
-            height: 50px;
+            width: 60px;  /* Aumentado el tamaño del botón */
+            height: 60px;
             background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png');
             background-size: cover;
             border: none;
@@ -145,6 +145,7 @@
         <div class="category-buttons">
             <button onclick="mostrarRectangulo('DolemOs')">DolemOs</button>
             <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
+            <button onclick="mostrarRectangulo('Juegos')">Juegos</button> <!-- Nueva categoría Juegos -->
         </div>
 
         <!-- Rectángulo blanco que siempre está visible -->
@@ -179,11 +180,14 @@
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10')">DolemOS 10</button>
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10 LTSC')">DolemOS 10 LTSC</button>
                 `;
             } else if (categoria === 'Optimizaciones') {
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti')">Carpeta de Opti</button>
+                `;
+            } else if (categoria === 'Juegos') {  // Nueva categoría "Juegos"
+                buttonsContainer.innerHTML = `
+                    <button class="inner-button" onclick="seleccionarDescarga('Juegos Friv')">Juegos Friv</button>
                 `;
             }
 
@@ -201,19 +205,19 @@
             // Configurar el enlace de descarga dependiendo de la categoría seleccionada
             if (categoria === 'DolemOS 11') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://link-dolemos11.com';  // Reemplazar con el enlace real
+                    window.location.href = 'https://drive.usercontent.google.com/download?id=1qDamM-5fqXNiOMvY-soE5aWV5XboHDX5&export=download&authuser=0&confirm=t&uuid=07372923-a295-4421-8114-2d81b55748da&at=AEz70l6baziZXVM3rWN6EX4cxxMo:1740540655463';  // Reemplazar con el enlace real
                 };
             } else if (categoria === 'DolemOS 10') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://link-dolemos10.com';  // Reemplazar con el enlace real
-                };
-            } else if (categoria === 'DolemOS 10 LTSC') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://link-dolemos10ltsc.com';  // Reemplazar con el enlace real
+                    window.location.href = 'https://drive.usercontent.google.com/download?id=1iVt3-6VfbbsLygaQWrGhLmCwwHCGmcRk&export=download&authuser=0&confirm=t&uuid=d0845611-ef55-4c89-8eab-483d4feee705&at=AEz70l7lAHtaQTc6vfDVYf6Q3cUq%3A1740541126938';  // Reemplazar con el enlace real
                 };
             } else if (categoria === 'Carpeta de Opti') {
                 downloadBtn.onclick = function() {
                     window.location.href = 'https://link-carpeta-opti.com';  // Reemplazar con el enlace real
+                };
+            } else if (categoria === 'Juegos Friv') {  // Lógica para Juegos Friv
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar';  // Reemplazar con el enlace real
                 };
             }
 
