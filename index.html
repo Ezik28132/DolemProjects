@@ -25,7 +25,7 @@
             padding: 40px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 90%;
-            max-width: 600px; /* Maximum width for larger screens */
+            max-width: 600px;
             overflow: hidden;
         }
 
@@ -37,7 +37,7 @@
 
         .category-buttons {
             display: flex;
-            justify-content: space-around;  /* Alineación distribuida */
+            justify-content: space-around;
             align-items: center;
             margin-bottom: 30px;
             gap: 10px;
@@ -148,8 +148,7 @@
         <div class="rectangle-white">
             <div id="buttons-container"></div>
 
-            <div id="rectangulo-rosa" class="rectangle-rosa">
-            </div>
+            <div id="rectangulo-rosa" class="rectangle-rosa"></div>
 
             <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
         </div>
@@ -163,10 +162,12 @@
             var rectanguloRosa = document.getElementById('rectangulo-rosa');
             var buttonsContainer = document.getElementById('buttons-container');
             var downloadBtn = document.getElementById('downloadBtn');
-        
+            
+            // Limpiar el contenedor de botones y ocultar rectángulo rosa
             buttonsContainer.innerHTML = "";
             rectanguloRosa.style.display = 'none';
 
+            // Mostrar los botones de acuerdo con la categoría seleccionada
             if (categoria === 'DolemOs') {
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
@@ -182,15 +183,16 @@
                 `;
             }
 
+            // Mostrar el rectángulo rosa con los botones
             rectanguloRosa.style.display = 'block';
-
-            downloadBtn.style.display = 'none';
+            downloadBtn.style.display = 'none';  // Ocultar el botón de descarga inicialmente
         }
 
         function seleccionarDescarga(categoria) {
             var downloadBtn = document.getElementById('downloadBtn');
             var rectanguloRosa = document.getElementById('rectangulo-rosa');
             
+            // Configuración de enlaces de descarga según la categoría seleccionada
             if (categoria === 'DolemOS 11') {
                 downloadBtn.onclick = function() {
                     window.location.href = 'https://drive.google.com/file/d/1qDamM-5fqXNiOMvY-soE5aWV5XboHDX5/view?usp=sharing';
@@ -198,6 +200,7 @@
             } else if (categoria === 'DolemOS 10') {
                 downloadBtn.onclick = function() {
                     window.location.href = 'https://download1479.mediafire.com/qezkorgru3lgk9QGdZMgkUkMEhASLlX6D9LTLs9wCJphroCM5heQAgkB-9Dn8Nm1cJoHE80IkG4_QZPGwQQeo0B4HJ6HWFXtCSb6Cr4_K8Lv2SuiwDaKh4HyD66TAoJ47f7DDQ7ZOI5nVOiJWmDZ_f5hJSpfDMLONupslFD7G0P9PbY/zkw4kpvrgyujx9h/DolemOS10.iso';
+                };
             } else if (categoria === 'Carpeta de Opti') {
                 downloadBtn.onclick = function() {
                     window.location.href = 'https://drive.google.com/file/d/1r9D1BolrAhfDNkGORBh70H8s3GtpPknL/view?usp=sharing';
@@ -207,12 +210,15 @@
                     window.location.href = 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar';  // Reemplazar con el enlace real
                 };
             }
+            
+            // Mostrar el botón de descarga
             downloadBtn.style.display = 'block';
         }
+
         function descargar() {
+            // Función para manejar la descarga, ya que el enlace se asigna dinámicamente.
         }
     </script>
 
 </body>
 </html>
-
