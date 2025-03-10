@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dolem Optimization WebSite</title>
-    <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png"> <!-- Logo en el título -->
+    <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png">
     <style>
-        /* Estilos generales */
+       
         body {
             font-family: 'Arial', sans-serif;
             background-color: #e0f7fa;
@@ -25,12 +25,12 @@
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 450px;  /* Aumentado el tamaño del contenedor */
+            width: 450px;
             overflow: hidden;
         }
 
         h1 {
-            font-size: 26px; /* Aumentado el tamaño del título */
+            font-size: 26px;
             margin-bottom: 30px;
             color: #333;
         }
@@ -38,15 +38,15 @@
         .category-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;  /* Aumentado el espacio entre los botones */
+            gap: 20px;
             margin-bottom: 30px;
         }
 
         button {
             background-color: #ffcccb;
             border: none;
-            padding: 18px 35px; /* Aumentado el tamaño de los botones */
-            font-size: 20px;  /* Aumentado el tamaño del texto */
+            padding: 18px 35px;
+            font-size: 20px;
             cursor: pointer;
             border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.2s;
@@ -57,7 +57,6 @@
             transform: scale(1.05);
         }
 
-        /* Rectángulo blanco que siempre está visible */
         .rectangle-white {
             width: 100%;
             height: auto;
@@ -74,7 +73,6 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        /* Rectángulo rosa que aparecerá con transición */
         .rectangle-rosa {
             display: none;
             width: 100%;
@@ -91,8 +89,8 @@
         .inner-button {
             background-color: #add8e6;
             border: none;
-            padding: 12px 25px; /* Aumentado el tamaño de los botones internos */
-            font-size: 18px;  /* Aumentado el tamaño del texto */
+            padding: 12px 25px;
+            font-size: 18px;
             cursor: pointer;
             border-radius: 8px;
             margin: 15px;
@@ -107,9 +105,9 @@
             display: none;
             background-color: #007bff;
             color: white;
-            padding: 16px 35px; /* Aumentado el tamaño del botón de descarga */
+            padding: 16px 35px;
             border-radius: 8px;
-            font-size: 18px;  /* Aumentado el tamaño del texto */
+            font-size: 18px;
             cursor: pointer;
             margin-top: 30px;
             transition: background-color 0.3s ease, transform 0.2s;
@@ -120,12 +118,11 @@
             transform: scale(1.05);
         }
 
-        /* Botón Discord en la esquina inferior izquierda */
         .discord-btn {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            width: 60px;  /* Aumentado el tamaño del botón */
+            width: 60px;
             height: 60px;
             background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png');
             background-size: cover;
@@ -140,22 +137,17 @@
 
     <div class="container">
         <h1>Dolem Optimization WebSite</h1>
-        
-        <!-- Botones de categoría al lado -->
+
         <div class="category-buttons">
             <button onclick="mostrarRectangulo('DolemOs')">DolemOs</button>
             <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
-            <button onclick="mostrarRectangulo('Juegos')">Juegos</button> <!-- Nueva categoría Juegos -->
+            <button onclick="mostrarRectangulo('Juegos')">Juegos</button>
         </div>
 
-        <!-- Rectángulo blanco que siempre está visible -->
         <div class="rectangle-white">
-            <!-- Aquí aparecerán los botones correspondientes al seleccionar una categoría -->
             <div id="buttons-container"></div>
 
-            <!-- Rectángulo rosa donde se colocarán los botones de DolemOs o Optimizaciones -->
             <div id="rectangulo-rosa" class="rectangle-rosa">
-                <!-- Los botones de DolemOs o Carpeta de Opti se añadirán aquí -->
             </div>
 
             <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
@@ -170,12 +162,10 @@
             var rectanguloRosa = document.getElementById('rectangulo-rosa');
             var buttonsContainer = document.getElementById('buttons-container');
             var downloadBtn = document.getElementById('downloadBtn');
-            
-            // Limpiar los botones existentes en el contenedor
+        
             buttonsContainer.innerHTML = "";
-            rectanguloRosa.style.display = 'none';  // Ocultar rectángulo rosa inicialmente
+            rectanguloRosa.style.display = 'none';
 
-            // Mostrar los botones correspondientes según la categoría seleccionada
             if (categoria === 'DolemOs') {
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
@@ -191,10 +181,8 @@
                 `;
             }
 
-            // Mostrar el rectángulo rosa con los botones
             rectanguloRosa.style.display = 'block';
 
-            // Ocultar el botón de descarga inicialmente
             downloadBtn.style.display = 'none';
         }
 
@@ -202,31 +190,25 @@
             var downloadBtn = document.getElementById('downloadBtn');
             var rectanguloRosa = document.getElementById('rectangulo-rosa');
             
-            // Configurar el enlace de descarga dependiendo de la categoría seleccionada
             if (categoria === 'DolemOS 11') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://drive.usercontent.google.com/download?id=1qDamM-5fqXNiOMvY-soE5aWV5XboHDX5&export=download&authuser=0&confirm=t&uuid=07372923-a295-4421-8114-2d81b55748da&at=AEz70l6baziZXVM3rWN6EX4cxxMo:1740540655463';  // Reemplazar con el enlace real
+                    window.location.href = 'https://drive.google.com/file/d/1qDamM-5fqXNiOMvY-soE5aWV5XboHDX5/view?usp=sharing';
                 };
             } else if (categoria === 'DolemOS 10') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://drive.usercontent.google.com/download?id=1iVt3-6VfbbsLygaQWrGhLmCwwHCGmcRk&export=download&authuser=0&confirm=t&uuid=d0845611-ef55-4c89-8eab-483d4feee705&at=AEz70l7lAHtaQTc6vfDVYf6Q3cUq%3A1740541126938';  // Reemplazar con el enlace real
-                };
+                    window.location.href = 'https://download1479.mediafire.com/qezkorgru3lgk9QGdZMgkUkMEhASLlX6D9LTLs9wCJphroCM5heQAgkB-9Dn8Nm1cJoHE80IkG4_QZPGwQQeo0B4HJ6HWFXtCSb6Cr4_K8Lv2SuiwDaKh4HyD66TAoJ47f7DDQ7ZOI5nVOiJWmDZ_f5hJSpfDMLONupslFD7G0P9PbY/zkw4kpvrgyujx9h/DolemOS10.iso';
             } else if (categoria === 'Carpeta de Opti') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://drive.google.com/file/d/1r9D1BolrAhfDNkGORBh70H8s3GtpPknL/view?usp=sharing';  // Reemplazar con el enlace real
+                    window.location.href = 'https://drive.google.com/file/d/1r9D1BolrAhfDNkGORBh70H8s3GtpPknL/view?usp=sharing';
                 };
-            } else if (categoria === 'Juegos Friv') {  // Lógica para Juegos Friv
+            } else if (categoria === 'Juegos Friv') {
                 downloadBtn.onclick = function() {
                     window.location.href = 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar';  // Reemplazar con el enlace real
                 };
             }
-
-            // Mostrar el botón de descarga
             downloadBtn.style.display = 'block';
         }
-
         function descargar() {
-            // Esta función ya está manejada en la lógica de seleccionarDescarga
         }
     </script>
 
