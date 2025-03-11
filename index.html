@@ -7,55 +7,64 @@
     <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             padding: 0;
-            background-image: linear-gradient(to top left, #d0e6f5, #81cfe0);
+            background-image: linear-gradient(to top left, #cce7ff, #ffb3b3);
         }
 
         .container {
             text-align: center;
             background-color: #ffffff;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             width: 90%;
-            max-width: 600px;
+            max-width: 650px;
             overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 30px;
             margin-bottom: 30px;
             color: #333;
+            font-weight: 500;
         }
 
         .category-buttons {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly;
             align-items: center;
-            margin-bottom: 30px;
-            gap: 10px;
+            margin-bottom: 40px;
+            gap: 15px;
         }
 
         button {
             background-color: #ffcccb;
             border: none;
-            padding: 18px 35px;
-            font-size: 20px;
+            padding: 20px 40px;
+            font-size: 22px;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 15px;
             transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         button:hover {
             background-color: #ffb6c1;
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+
+        .active {
+            background-color: #ff7f7f;
+            color: #fff;
+            transform: scale(1.1);
         }
 
         .rectangle-white {
@@ -63,10 +72,10 @@
             height: auto;
             margin-top: 30px;
             background-color: #ffffff;
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -88,30 +97,39 @@
         }
 
         .inner-button {
-            background-color: #add8e6;
+            background-color: #ffcccb; /* Mismo color que los botones de categoría */
             border: none;
-            padding: 12px 25px;
-            font-size: 18px;
+            padding: 14px 30px;
+            font-size: 20px;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 10px;
             margin: 15px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .inner-button:hover {
-            background-color: #87cefa;
+            background-color: #ffb6c1;
+            transform: scale(1.05);
+        }
+
+        .active-inner {
+            background-color: #ff7f7f;
+            color: #fff;
+            transform: scale(1.1);
         }
 
         .download-button {
             display: none;
             background-color: #007bff;
             color: white;
-            padding: 16px 35px;
-            border-radius: 8px;
-            font-size: 18px;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-size: 20px;
             cursor: pointer;
             margin-top: 30px;
             transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         .download-button:hover {
@@ -131,6 +149,20 @@
             cursor: pointer;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .discord-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -140,9 +172,9 @@
         <h1>Dolem Optimization WebSite</h1>
 
         <div class="category-buttons">
-            <button onclick="mostrarRectangulo('DolemOs')">DolemOs</button>
-            <button onclick="mostrarRectangulo('Optimizaciones')">Optimizaciones</button>
-            <button onclick="mostrarRectangulo('Juegos')">Juegos</button>
+            <button id="btnDolemOs" onclick="mostrarRectangulo('DolemOs', this)">DolemOs</button>
+            <button id="btnOptimizaciones" onclick="mostrarRectangulo('Optimizaciones', this)">Optimizaciones</button>
+            <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button> <!-- Cambié el nombre de 'Juegos' a 'Extra' -->
         </div>
 
         <div class="rectangle-white">
@@ -158,7 +190,14 @@
     <button class="discord-btn" onclick="window.open('https://discord.gg/sEt6N2aj', '_blank')"></button>
 
     <script>
-        function mostrarRectangulo(categoria) {
+        function mostrarRectangulo(categoria, btn) {
+            // Quitar la clase 'active' de todos los botones de categoría
+            const categoryButtons = document.querySelectorAll('.category-buttons button');
+            categoryButtons.forEach(button => button.classList.remove('active'));
+
+            // Agregar la clase 'active' al botón de categoría seleccionado
+            btn.classList.add('active');
+
             var rectanguloRosa = document.getElementById('rectangulo-rosa');
             var buttonsContainer = document.getElementById('buttons-container');
             var downloadBtn = document.getElementById('downloadBtn');
@@ -170,16 +209,16 @@
             // Mostrar los botones de acuerdo con la categoría seleccionada
             if (categoria === 'DolemOs') {
                 buttonsContainer.innerHTML = `
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11')">DolemOS 11</button>
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10')">DolemOS 10</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11', this)">DolemOS 11</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10', this)">DolemOS 10</button>
                 `;
             } else if (categoria === 'Optimizaciones') {
                 buttonsContainer.innerHTML = `
-                    <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti')">Carpeta de Opti</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti', this)">Carpeta de Opti</button>
                 `;
-            } else if (categoria === 'Juegos') {  // Nueva categoría "Juegos"
+            } else if (categoria === 'Extra') {  // Cambié el nombre de 'Juegos' a 'Extra'
                 buttonsContainer.innerHTML = `
-                    <button class="inner-button" onclick="seleccionarDescarga('Juegos Friv')">Juegos Friv</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('Juegos Friv', this)">Juegos Friv</button>
                 `;
             }
 
@@ -188,9 +227,15 @@
             downloadBtn.style.display = 'none';  // Ocultar el botón de descarga inicialmente
         }
 
-        function seleccionarDescarga(categoria) {
+        function seleccionarDescarga(categoria, btn) {
+            // Quitar la clase 'active-inner' de todos los botones internos
+            const innerButtons = document.querySelectorAll('.inner-button');
+            innerButtons.forEach(button => button.classList.remove('active-inner'));
+
+            // Agregar la clase 'active-inner' al botón interno seleccionado
+            btn.classList.add('active-inner');
+
             var downloadBtn = document.getElementById('downloadBtn');
-            var rectanguloRosa = document.getElementById('rectangulo-rosa');
             
             // Configuración de enlaces de descarga según la categoría seleccionada
             if (categoria === 'DolemOS 11') {
@@ -213,10 +258,6 @@
             
             // Mostrar el botón de descarga
             downloadBtn.style.display = 'block';
-        }
-
-        function descargar() {
-            // Función para manejar la descarga, ya que el enlace se asigna dinámicamente.
         }
     </script>
 
