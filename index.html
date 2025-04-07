@@ -97,7 +97,7 @@
         }
 
         .inner-button {
-            background-color: #ffcccb; /* Mismo color que los botones de categoría */
+            background-color: #ffcccb;
             border: none;
             padding: 14px 30px;
             font-size: 20px;
@@ -174,7 +174,7 @@
         <div class="category-buttons">
             <button id="btnDolemOs" onclick="mostrarRectangulo('DolemOs', this)">DolemOs</button>
             <button id="btnOptimizaciones" onclick="mostrarRectangulo('Optimizaciones', this)">Optimizaciones</button>
-            <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button> <!-- Cambié el nombre de 'Juegos' a 'Extra' -->
+            <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button>
         </div>
 
         <div class="rectangle-white">
@@ -211,12 +211,15 @@
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11', this)">DolemOS 11</button>
                     <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10', this)">DolemOS 10</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS10 LTSC 2021', this)">DolemOS10 LTSC 2021</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS10 LTSC 2019', this)">DolemOS10 LTSC 2019</button>
+                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS11 LTSC', this)">DolemOS11 LTSC</button>
                 `;
             } else if (categoria === 'Optimizaciones') {
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti', this)">Carpeta de Opti</button>
                 `;
-            } else if (categoria === 'Extra') {  // Cambié el nombre de 'Juegos' a 'Extra'
+            } else if (categoria === 'Extra') {
                 buttonsContainer.innerHTML = `
                     <button class="inner-button" onclick="seleccionarDescarga('Juegos Friv', this)">Juegos Friv</button>
                 `;
@@ -240,11 +243,23 @@
             // Configuración de enlaces de descarga según la categoría seleccionada
             if (categoria === 'DolemOS 11') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://drive.google.com/file/d/1qDamM-5fqXNiOMvY-soE5aWV5XboHDX5/view?usp=sharing';
+                    window.location.href = 'https://www.mediafire.com/file/8viggn5z3x08xt4/DolemOS11.iso/file';
                 };
             } else if (categoria === 'DolemOS 10') {
                 downloadBtn.onclick = function() {
                     window.location.href = 'https://download1479.mediafire.com/qezkorgru3lgk9QGdZMgkUkMEhASLlX6D9LTLs9wCJphroCM5heQAgkB-9Dn8Nm1cJoHE80IkG4_QZPGwQQeo0B4HJ6HWFXtCSb6Cr4_K8Lv2SuiwDaKh4HyD66TAoJ47f7DDQ7ZOI5nVOiJWmDZ_f5hJSpfDMLONupslFD7G0P9PbY/zkw4kpvrgyujx9h/DolemOS10.iso';
+                };
+            } else if (categoria === 'DolemOS10 LTSC 2021') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://www.mediafire.com/file/jl8q0br4ck25p46/DolemOS10LTSC2021.iso/file';
+                };
+            } else if (categoria === 'DolemOS10 LTSC 2019') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://www.mediafire.com/file/re1h7xz5iaz1za6/DolemOS10LTSC2019.iso/file';
+                };
+            } else if (categoria === 'DolemOS11 LTSC') {
+                downloadBtn.onclick = function() {
+                    window.location.href = 'https://www.mediafire.com/file/1rcjxpzm01bdak0/DolemOS11LTSC.iso/file';
                 };
             } else if (categoria === 'Carpeta de Opti') {
                 downloadBtn.onclick = function() {
@@ -252,7 +267,7 @@
                 };
             } else if (categoria === 'Juegos Friv') {
                 downloadBtn.onclick = function() {
-                    window.location.href = 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar';  // Reemplazar con el enlace real
+                    window.location.href = 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar';
                 };
             }
             
