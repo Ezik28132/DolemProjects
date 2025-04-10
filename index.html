@@ -1,280 +1,287 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dolem Optimization WebSite</title>
-    <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            background-image: linear-gradient(to top left, #cce7ff, #ffb3b3);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dolem Optimization WebSite</title>
+  <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png">
+  <!-- Se añade la fuente Poppins para mayor legibilidad y estilo -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffb3b3, #ffe6e6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        .container {
-            text-align: center;
-            background-color: #ffffff;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 650px;
-            overflow: hidden;
-            animation: fadeIn 0.8s ease-out;
-        }
+    /* Splash screen */
+    #splashScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeInSplash 1s forwards, fadeOutSplash 1s forwards 2.5s;
+    }
+    
+    #splashScreen h1 {
+      font-size: 48px;
+      color: #d63384;
+      margin: 0;
+      text-align: center;
+    }
+    
+    @keyframes fadeInSplash {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeOutSplash {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
 
-        h1 {
-            font-size: 30px;
-            margin-bottom: 30px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .category-buttons {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-bottom: 40px;
-            gap: 15px;
-        }
-
-        button {
-            background-color: #ffcccb;
-            border: none;
-            padding: 20px 40px;
-            font-size: 22px;
-            cursor: pointer;
-            border-radius: 15px;
-            transition: background-color 0.3s ease, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        button:hover {
-            background-color: #ffb6c1;
-            transform: scale(1.1);
-        }
-
-        .active {
-            background-color: #ff7f7f;
-            color: #fff;
-            transform: scale(1.1);
-        }
-
-        .rectangle-white {
-            width: 100%;
-            height: auto;
-            margin-top: 30px;
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .rectangle-rosa {
-            display: none;
-            width: 100%;
-            background-color: #f3a7b5;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .inner-button {
-            background-color: #ffcccb;
-            border: none;
-            padding: 14px 30px;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 10px;
-            margin: 15px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .inner-button:hover {
-            background-color: #ffb6c1;
-            transform: scale(1.05);
-        }
-
-        .active-inner {
-            background-color: #ff7f7f;
-            color: #fff;
-            transform: scale(1.1);
-        }
-
-        .download-button {
-            display: none;
-            background-color: #007bff;
-            color: white;
-            padding: 18px 40px;
-            border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: background-color 0.3s ease, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .download-button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        .discord-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png');
-            background-size: cover;
-            border: none;
-            cursor: pointer;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .discord-btn:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+    /* Contenedor principal */
+    .container {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      width: 90%;
+      max-width: 650px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: none;
+      animation: showContainer 0.5s ease-out forwards 3.5s;
+    }
+    
+    @keyframes showContainer {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h1.main-title {
+      font-size: 30px;
+      margin-bottom: 30px;
+      color: #333333;
+      font-weight: 500;
+    }
+    
+    .category-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .category-buttons button {
+      background-color: #a0d2eb; /* celeste claro */
+      border: none;
+      padding: 18px 36px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: background-color 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      color: #333333;
+      font-weight: 500;
+    }
+    
+    .category-buttons button:hover {
+      background-color: #89c2e8;
+      transform: scale(1.03);
+    }
+    
+    .active {
+      background-color: #74a9d8;  /* azul pastel */
+      color: #fff;
+      transform: scale(1.03);
+    }
+    
+    .rectangle-white {
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      margin-top: 30px;
+    }
+    
+    .rectangle-rosa {
+      display: none;
+      width: 100%;
+      background-color: #ffe6e6;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      transition: opacity 0.5s ease-in-out;
+      font-size: 16px;
+    }
+    
+    .inner-button {
+      background-color: #a0d2eb;
+      border: none;
+      padding: 14px 30px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 15px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      color: #333333;
+      font-weight: 500;
+    }
+    
+    .inner-button:hover {
+      background-color: #89c2e8;
+      transform: scale(1.05);
+    }
+    
+    .active-inner {
+      background-color: #74a9d8;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    
+    .download-button {
+      display: none;
+      background-color: #007bff;
+      color: white;
+      padding: 18px 40px;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s ease, transform 0.2s;
+      border: none;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .download-button:hover {
+      background-color: #0056b3;
+      transform: scale(1.03);
+    }
+    
+    .discord-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png');
+      background-size: cover;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .discord-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 <body>
+  <!-- Splash Screen -->
+  <div id="splashScreen">
+    <h1>Bienvenido a DolemProjects</h1>
+  </div>
 
-    <div class="container">
-        <h1>Dolem Optimization WebSite</h1>
-
-        <div class="category-buttons">
-            <button id="btnDolemOs" onclick="mostrarRectangulo('DolemOs', this)">DolemOs</button>
-            <button id="btnOptimizaciones" onclick="mostrarRectangulo('Optimizaciones', this)">Optimizaciones</button>
-            <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button>
-        </div>
-
-        <div class="rectangle-white">
-            <div id="buttons-container"></div>
-
-            <div id="rectangulo-rosa" class="rectangle-rosa"></div>
-
-            <button id="downloadBtn" class="download-button" onclick="descargar()">Descargar</button>
-        </div>
+  <!-- Pantalla principal -->
+  <div class="container">
+    <h1 class="main-title">Dolem Optimization WebSite</h1>
+    <div class="category-buttons">
+      <button id="btnDolemOs" onclick="mostrarRectangulo('DolemOs', this)">DolemOs</button>
+      <button id="btnOptimizaciones" onclick="mostrarRectangulo('Optimizaciones', this)">Optimizaciones</button>
+      <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button>
     </div>
+    <div class="rectangle-white">
+      <div id="buttons-container"></div>
+      <div id="rectangulo-rosa" class="rectangle-rosa">Selecciona una opción para habilitar la descarga.</div>
+      <button id="downloadBtn" class="download-button">Descargar</button>
+    </div>
+  </div>
 
-    <!-- Botón Discord -->
-    <button class="discord-btn" onclick="window.open('https://discord.gg/sEt6N2aj', '_blank')"></button>
+  <!-- Botón Discord -->
+  <button class="discord-btn" onclick="window.open('https://discord.gg/sEt6N2aj', '_blank')"></button>
 
-    <script>
-        function mostrarRectangulo(categoria, btn) {
-            // Quitar la clase 'active' de todos los botones de categoría
-            const categoryButtons = document.querySelectorAll('.category-buttons button');
-            categoryButtons.forEach(button => button.classList.remove('active'));
+  <script>
+    // Control del splash y visualización del contenedor principal
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.getElementById('splashScreen').style.display = 'none';
+      }, 3500); 
+      
+      setTimeout(() => {
+        document.querySelector('.container').style.display = 'block';
+      }, 3500);
+    });
 
-            // Agregar la clase 'active' al botón de categoría seleccionado
-            btn.classList.add('active');
+    function mostrarRectangulo(categoria, btn) {
+      document.querySelectorAll('.category-buttons button')
+              .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      document.getElementById('rectangulo-rosa').style.display = 'block';
+      document.getElementById('buttons-container').innerHTML = '';
+      document.getElementById('downloadBtn').style.display = 'none';
 
-            var rectanguloRosa = document.getElementById('rectangulo-rosa');
-            var buttonsContainer = document.getElementById('buttons-container');
-            var downloadBtn = document.getElementById('downloadBtn');
-            
-            // Limpiar el contenedor de botones y ocultar rectángulo rosa
-            buttonsContainer.innerHTML = "";
-            rectanguloRosa.style.display = 'none';
+      if (categoria === 'DolemOs') {
+        document.getElementById('buttons-container').innerHTML = `
+          <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11', this)">DolemOS 11</button>
+          <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10', this)">DolemOS 10</button>
+          <button class="inner-button" onclick="seleccionarDescarga('DolemOS10 LTSC 2021', this)">DolemOS10 LTSC 2021</button>
+          <button class="inner-button" onclick="seleccionarDescarga('DolemOS10 LTSC 2019', this)">DolemOS10 LTSC 2019</button>
+          <button class="inner-button" onclick="seleccionarDescarga('DolemOS11 LTSC', this)">DolemOS11 LTSC</button>
+        `;
+      } else if (categoria === 'Optimizaciones') {
+        document.getElementById('buttons-container').innerHTML = `
+          <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti', this)">Carpeta de Opti</button>
+        `;
+      } else if (categoria === 'Extra') {
+        document.getElementById('buttons-container').innerHTML = `
+          <button class="inner-button" onclick="seleccionarDescarga('Juegos Friv', this)">Juegos Friv</button>
+        `;
+      }
+    }
 
-            // Mostrar los botones de acuerdo con la categoría seleccionada
-            if (categoria === 'DolemOs') {
-                buttonsContainer.innerHTML = `
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 11', this)">DolemOS 11</button>
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS 10', this)">DolemOS 10</button>
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS10 LTSC 2021', this)">DolemOS10 LTSC 2021</button>
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS10 LTSC 2019', this)">DolemOS10 LTSC 2019</button>
-                    <button class="inner-button" onclick="seleccionarDescarga('DolemOS11 LTSC', this)">DolemOS11 LTSC</button>
-                `;
-            } else if (categoria === 'Optimizaciones') {
-                buttonsContainer.innerHTML = `
-                    <button class="inner-button" onclick="seleccionarDescarga('Carpeta de Opti', this)">Carpeta de Opti</button>
-                `;
-            } else if (categoria === 'Extra') {
-                buttonsContainer.innerHTML = `
-                    <button class="inner-button" onclick="seleccionarDescarga('Juegos Friv', this)">Juegos Friv</button>
-                `;
-            }
-
-            // Mostrar el rectángulo rosa con los botones
-            rectanguloRosa.style.display = 'block';
-            downloadBtn.style.display = 'none';  // Ocultar el botón de descarga inicialmente
-        }
-
-        function seleccionarDescarga(categoria, btn) {
-            // Quitar la clase 'active-inner' de todos los botones internos
-            const innerButtons = document.querySelectorAll('.inner-button');
-            innerButtons.forEach(button => button.classList.remove('active-inner'));
-
-            // Agregar la clase 'active-inner' al botón interno seleccionado
-            btn.classList.add('active-inner');
-
-            var downloadBtn = document.getElementById('downloadBtn');
-            
-            // Configuración de enlaces de descarga según la categoría seleccionada
-            if (categoria === 'DolemOS 11') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://www.mediafire.com/file/8viggn5z3x08xt4/DolemOS11.iso/file';
-                };
-            } else if (categoria === 'DolemOS 10') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://download1479.mediafire.com/qezkorgru3lgk9QGdZMgkUkMEhASLlX6D9LTLs9wCJphroCM5heQAgkB-9Dn8Nm1cJoHE80IkG4_QZPGwQQeo0B4HJ6HWFXtCSb6Cr4_K8Lv2SuiwDaKh4HyD66TAoJ47f7DDQ7ZOI5nVOiJWmDZ_f5hJSpfDMLONupslFD7G0P9PbY/zkw4kpvrgyujx9h/DolemOS10.iso';
-                };
-            } else if (categoria === 'DolemOS10 LTSC 2021') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://www.mediafire.com/file/jl8q0br4ck25p46/DolemOS10LTSC2021.iso/file';
-                };
-            } else if (categoria === 'DolemOS10 LTSC 2019') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://www.mediafire.com/file/re1h7xz5iaz1za6/DolemOS10LTSC2019.iso/file';
-                };
-            } else if (categoria === 'DolemOS11 LTSC') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://www.mediafire.com/file/1rcjxpzm01bdak0/DolemOS11LTSC.iso/file';
-                };
-            } else if (categoria === 'Carpeta de Opti') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://www.mediafire.com/file/oys2l10siequids/Carpeta+De+Optimización.7z/file';
-                };
-            } else if (categoria === 'Juegos Friv') {
-                downloadBtn.onclick = function() {
-                    window.location.href = 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar';
-                };
-            }
-            
-            // Mostrar el botón de descarga
-            downloadBtn.style.display = 'block';
-        }
-    </script>
-
+    function seleccionarDescarga(categoria, btn) {
+      document.querySelectorAll('.inner-button').forEach(b => b.classList.remove('active-inner'));
+      btn.classList.add('active-inner');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const enlaces = {
+        'DolemOS 11': 'https://www.mediafire.com/file/8viggn5z3x08xt4/DolemOS11.iso/file',
+        'DolemOS 10': 'https://download1479.mediafire.com/qezkorgru3lgk9QGdZMgkUkMEhASLlX6D9LTLs9wCJphroCM5heQAgkB-9Dn8Nm1cJoHE80IkG4_QZPGwQQeo0B4HJ6HWFXtCSb6Cr4_K8Lv2SuiwDaKh4HyD66TAoJ47f7DDQ7ZOI5nVOiJWmDZ_f5hJSpfDMLONupslFD7G0P9PbY/zkw4kpvrgyujx9h/DolemOS10.iso',
+        'DolemOS10 LTSC 2021': 'https://www.mediafire.com/file/jl8q0br4ck25p46/DolemOS10LTSC2021.iso/file',
+        'DolemOS10 LTSC 2019': 'https://www.mediafire.com/file/re1h7xz5iaz1za6/DolemOS10LTSC2019.iso/file',
+        'DolemOS11 LTSC': 'https://www.mediafire.com/file/1rcjxpzm01bdak0/DolemOS11LTSC.iso/file',
+        'Carpeta de Opti': 'https://www.mediafire.com/file/oys2l10siequids/Carpeta+De+Optimización.7z/file',
+        'Juegos Friv': 'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar'
+      };
+      downloadBtn.style.display = 'block';
+      downloadBtn.onclick = () => window.location.href = enlaces[categoria];
+    }
+  </script>
 </body>
 </html>
