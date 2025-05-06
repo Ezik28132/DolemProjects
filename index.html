@@ -4,86 +4,77 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dolem Optimization WebSite</title>
-  <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png" type="image/png">
+  <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-thumbnail.png" type="image/png">
   <!-- Fuente Poppins para legibilidad y estilo -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0; padding: 0;
-      background: linear-gradient(135deg, #ffb3b3, #ffe6e6);
-      height: 100vh; overflow: hidden;
-    }
-    /* Splash screen */
-    #splashScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; animation: fadeInSplash 1s forwards, fadeOutSplash 1s forwards 2.5s; }
-    #splashScreen h1 { font-size: 48px; color: #d63384; margin: 0; text-align: center; }
-    @keyframes fadeInSplash { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100vh; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #ffb3b3, #ffe6e6); overflow-x: hidden; display: flex; flex-direction: column; }
+    .blur { filter: blur(5px); }
+    #splashScreen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(255,255,255,0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; animation: fadeInSplash 1s forwards, fadeOutSplash 1s forwards 2.5s; }
+    #splashScreen.fade-out { display: none; }
+    @keyframes fadeInSplash { from { opacity: 0; } to { opacity: 1; } }
     @keyframes fadeOutSplash { from { opacity: 1; } to { opacity: 0; } }
-    /* Contenedor principal */
-    .container {
-      position: absolute;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background-color: #ffffff; border-radius: 20px; padding: 40px;
-      width: 90%; max-width: 650px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      text-align: center; display: none; animation: showContainer 0.5s ease-out forwards 3.5s;
-    }
-    @keyframes showContainer { from { opacity: 0; transform: translate(-50%, -40%); } to { opacity: 1; transform: translate(-50%, -50%); } }
-    h1.main-title { font-size: 30px; margin-bottom: 30px; color: #333; font-weight: 500; }
-    .category-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-    .category-buttons button { background-color: #a0d2eb; border: none; padding: 18px 36px; font-size: 20px; cursor: pointer; border-radius: 15px; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.08); color: #333; font-weight: 500; }
+
+    #mainContent { flex: 1; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 5vh 5vw; }
+    #mainContent.show { display: flex; }
+
+    .title-box { background: #fff; border-radius: 1rem; padding: 2rem; width: 100%; max-width: 650px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); text-align: center; margin-bottom: 2rem; }
+    h1.main-title { font-size: 2.5rem; color: #333; font-weight: 500; }
+
+    .category-buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .category-buttons button { flex: 1 1 calc(33% - 1rem); min-width: 100px; padding: 1rem; font-size: 1.125rem; border: none; border-radius: 0.75rem; background-color: #a0d2eb; color: #333; cursor: pointer; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
     .category-buttons button:hover { background-color: #89c2e8; transform: scale(1.03); }
-    .active { background-color: #74a9d8; color: #fff; transform: scale(1.03); }
-    .rectangle-white { width: 100%; background-color: #fff; border-radius: 15px; padding: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); margin-top: 30px; text-align: center; }
-    .rectangle-rosa { display: none; width: 100%; background-color: #ffe6e6; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 30px; transition: opacity 0.5s ease-in-out; font-size: 16px; }
-    .inner-button { background-color: #a0d2eb; border: none; padding: 14px 30px; font-size: 20px; cursor: pointer; border-radius: 10px; margin: 15px; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.08); color: #333; font-weight: 500; }
-    .inner-button:hover { background-color: #89c2e8; transform: scale(1.05); }
-    .active-inner { background-color: #74a9d8; color: #fff; transform: scale(1.05); }
-    .download-button { display: none; background-color: #007bff; color: #fff; padding: 18px 40px; border-radius: 10px; font-size: 20px; cursor: pointer; margin-top: 30px; transition: background-color 0.3s, transform 0.2s; border: none; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .download-button:hover { background-color: #0056b3; transform: scale(1.03); }
-    /* Feedback Section fixed left */
-    .feedback-section {
-      position: fixed;
-      top: 20%; left: 20px;
-      width: 280px; background: rgba(255,255,255,0.95);
-      border-radius: 15px; padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      text-align: left;
-      font-size: 16px;
-    }
-    .feedback-section h2 { font-size: 20px; margin-bottom: 10px; color: #333; }
-    .feedback-section input[type="text"] {
-      width: 100%; padding: 8px; margin-bottom: 10px;
-      border: 1px solid #ccc; border-radius: 6px;
-      font-size: 16px;
-    }
-    .stars { display: flex; gap: 5px; margin-bottom: 10px; }
-    .star { font-size: 26px; cursor: pointer; transition: transform 0.2s; }
-    .star:hover { transform: scale(1.2); }
+    .category-buttons .active { background-color: #74a9d8; color: #fff; }
+
+    .rectangle-white { width: 100%; max-width: 650px; background-color: #fff; border-radius: 1rem; padding: 2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.12); text-align: center; }
+    .rectangle-rosa { display: none; margin-top: 1rem; padding: 1rem; background: #ffe6e6; border-radius: 0.625rem; }
+    .inner-button { margin: 0.5rem; padding: 0.75rem 1.5rem; border: none; border-radius: 0.625rem; background: #a0d2eb; color: #333; cursor: pointer; transition: transform 0.2s; }
+    .inner-button:hover { transform: scale(1.05); }
+    .active-inner { background: #74a9d8; color: #fff; }
+
+    .download-button { display: none; margin-top: 1.5rem; padding: 1rem 2rem; font-size: 1.125rem; border: none; border-radius: 0.625rem; background: #007bff; color: #fff; cursor: pointer; }
+    .download-button:hover { transform: scale(1.03); }
+
+    /* Ocultar el botón de reseñas hasta después de la transición */
+    #showFeedbackBtn { display: none; position: fixed; top: 20px; left: 20px; padding: 0.75rem 1.5rem; background: #28a745; color: #fff; border: none; border-radius: 0.75rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); z-index: 10000; }
+    .feedback-section { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%; max-width: 400px; background: rgba(255,255,255,0.95); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: 10001; }
+    .feedback-section h2 { margin-bottom: 1rem; font-size: 1.25rem; color: #333; }
+    .close-feedback { position: absolute; top: 0.5rem; right: 0.75rem; background: transparent; border: none; font-size: 1.25rem; cursor: pointer; }
+    .feedback-section input, .feedback-section textarea { width: 100%; margin-bottom: 0.75rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 0.375rem; }
+    .stars { display: flex; gap: 0.25rem; margin-bottom: 0.75rem; }
+    .star { font-size: 1.5rem; cursor: pointer; }
     .star.selected { color: #FFD700; }
-    .feedback-section textarea {
-      width: 100%; height: 80px; padding: 8px;
-      border: 1px solid #ccc; border-radius: 6px;
-      resize: vertical; font-size: 14px;
-    }
-    .feedback-section button.submit-feedback {
-      margin-top: 10px; width: 100%;
-      background-color: #28a745; color: #fff; padding: 10px;
-      border: none; border-radius: 6px;
-      font-size: 16px; cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .feedback-section button.submit-feedback:hover { background-color: #218838; }
-    .discord-btn { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png'); background-size: cover; border: none; cursor: pointer; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s ease; }
-    .discord-btn:hover { transform: scale(1.1); }
+    .submit-feedback { width: 100%; padding: 0.75rem; background: #007bff; color: #fff; border: none; border-radius: 0.375rem; cursor: pointer; }
+    .submit-feedback:hover { background: #0056b3; }
+
+    .discord-btn { position: fixed; bottom: 20px; right: 20px; width: 3.75rem; height: 3.75rem; background-image: url('https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png'); background-size: cover; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+    @media (max-width:768px) { #showFeedbackBtn { top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); } }
   </style>
 </head>
 <body>
-  <!-- Splash Screen -->
   <div id="splashScreen"><h1>Bienvenido a DolemProjects</h1></div>
 
-  <!-- Feedback Section -->
-  <div class="feedback-section">
+  <div id="mainContent">
+    <div class="title-box">
+      <h1 class="main-title">Dolem Optimization WebSite</h1>
+      <div class="category-buttons">
+        <button id="btnDolemOs" onclick="mostrarRectangulo('DolemOs', this)">DolemOs</button>
+        <button id="btnOptimizaciones" onclick="mostrarRectangulo('Optimizaciones', this)">Optimizaciones</button>
+        <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button>
+      </div>
+    </div>
+    <div class="rectangle-white">
+      <div id="buttons-container"></div>
+      <div id="rectangulo-rosa" class="rectangle-rosa">Selecciona una opción para habilitar la descarga.</div>
+      <button id="downloadBtn" class="download-button">Descargar</button>
+    </div>
+  </div>
+
+  <button id="showFeedbackBtn">Deja tu reseña</button>
+  <div class="feedback-section" id="feedbackSection">
+    <button class="close-feedback" id="closeFeedbackBtn">×</button>
     <h2>Deja tu reseña</h2>
     <input type="text" id="nickname" placeholder="Tu nickname" />
     <div class="stars" id="starContainer">
@@ -94,36 +85,36 @@
       <span class="star" data-value="5">★</span>
     </div>
     <textarea id="feedbackText" placeholder="Escribe tu reseña..."></textarea>
-    <button class="submit-feedback" id="submitFeedback">Enviar reseña</button>
+    <button class="submit-feedback" id="submitFeedback">Enviar</button>
   </div>
 
-  <!-- Pantalla principal -->
-  <div class="container">
-    <h1 class="main-title">Dolem Optimization WebSite</h1>
-    <div class="category-buttons">
-      <button id="btnDolemOs" onclick="mostrarRectangulo('DolemOs', this)">DolemOs</button>
-      <button id="btnOptimizaciones" onclick="mostrarRectangulo('Optimizaciones', this)">Optimizaciones</button>
-      <button id="btnExtra" onclick="mostrarRectangulo('Extra', this)">Extra</button>
-    </div>
-    <div class="rectangle-white">
-      <div id="buttons-container"></div>
-      <div id="rectangulo-rosa" class="rectangle-rosa">Selecciona una opción para habilitar la descarga.</div>
-      <button id="downloadBtn" class="download-button">Descargar</button>
-    </div>
-  </div>
-
-  <!-- Botón Discord -->
-  <button class="discord-btn" onclick="window.open('https://discord.gg/sEt6N2aj', '_blank')"></button>
+  <button class="discord-btn" onclick="window.open('https://discord.gg/sEt6N2aj','_blank')"></button>
 
   <script>
     const webhookUrl = 'https://discord.com/api/webhooks/1364105680906223684/XtwGs4iIVEhib7iciHY1mtX3wkLF9NGapQ6R5lKwEWv7acHK_R7KZAPkHz3ISOzhsT0e';
-    const avatarUrl = 'https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-web-design-globe-thumbnail.png';
+    const avatarUrl = 'https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-thumbnail.png';
 
-    // Splash
-    window.addEventListener('load', function() {
-      setTimeout(() => document.getElementById('splashScreen').style.display = 'none', 3500);
-      setTimeout(() => document.querySelector('.container').style.display = 'block', 3500);
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('splashScreen').classList.add('fade-out');
+        document.getElementById('mainContent').classList.add('show');
+        // Mostrar el botón de feedback tras la transición
+        document.getElementById('showFeedbackBtn').style.display = 'block';
+      }, 3500);
     });
+
+    document.getElementById('showFeedbackBtn').addEventListener('click', () => toggleFeedback());
+    document.getElementById('closeFeedbackBtn').addEventListener('click', () => toggleFeedback());
+
+    function toggleFeedback() {
+      const fs = document.getElementById('feedbackSection');
+      const main = document.getElementById('mainContent');
+      const showBtn = document.getElementById('showFeedbackBtn');
+      const discord = document.querySelector('.discord-btn');
+      const isVisible = fs.style.display === 'block';
+      fs.style.display = isVisible ? 'none' : 'block';
+      [main, showBtn, discord].forEach(el => el.classList.toggle('blur', !isVisible));
+    }
 
     function mostrarRectangulo(categoria, btn) {
       document.querySelectorAll('.category-buttons button').forEach(b => b.classList.remove('active'));
@@ -131,19 +122,34 @@
       document.getElementById('rectangulo-rosa').style.display = 'block';
       document.getElementById('buttons-container').innerHTML = '';
       document.getElementById('downloadBtn').style.display = 'none';
-      const opciones = { DolemOs: ['DolemOS 11','DolemOS 10','DolemOS10 LTSC 2021','DolemOS10 LTSC 2019','DolemOS11 LTSC'], Optimizaciones: ['Carpeta de Opti'], Extra: ['Juegos Friv'] };
-      if (opciones[categoria]) document.getElementById('buttons-container').innerHTML = opciones[categoria].map(opt => `<button class=\"inner-button\" onclick=\"seleccionarDescarga('${opt}', this)\">${opt}</button>`).join('');
+      const opciones = {
+        DolemOs: ['DolemOS 10','DolemOS 10 LTSC','DolemOS 11','DolemOS 11 23h2','DolemOS11 24h2'],
+        Optimizaciones: ['Carpeta de Opti'],
+        Extra: ['Juegos Friv']
+      };
+      const enlaces = {
+        'DolemOS 10': 'https://www.mediafire.com/file/ozp2cqivounykpm/DolemOS10.iso/file',
+        'DolemOS 10 LTSC': 'https://www.mediafire.com/file/9e3jdvbb76rszla/DolemOS10LTSC.iso/file',
+        'DolemOS 11': 'https://www.mediafire.com/file/52oefu4rrlqkutk/DolemOS11.iso/file',
+        'DolemOS 11 23h2': 'https://drive.google.com/file/d/18ULBVa88GOwofnO4j_wj5OpGzZdKQevh/view?usp=sharing',
+        'DolemOS11 24h2': 'https://www.mediafire.com/file/example/DolemOS11_24h2.iso/file',
+        'Carpeta de Opti': 'https://www.mediafire.com/file/oys2l10siequids/Carpeta+De+Optimización.7z/file',
+        'Juegos Friv': 'https://www.mediafire.com/file/4wyr11metkfoden/FlashGames.rar/file'
+      };
+      opciones[categoria].forEach(opt => {
+        const btnOpt = document.createElement('button'); btnOpt.className = 'inner-button'; btnOpt.textContent = opt;
+        btnOpt.addEventListener('click', () => {
+          document.querySelectorAll('.inner-button').forEach(b => b.classList.remove('active-inner'));
+          btnOpt.classList.add('active-inner');
+          const dl = document.getElementById('downloadBtn');
+          dl.style.display = 'inline-block';
+          dl.onclick = () => window.location.href = enlaces[opt];
+        });
+        document.getElementById('buttons-container').appendChild(btnOpt);
+      });
     }
 
-    function seleccionarDescarga(categoria, btn) {
-      document.querySelectorAll('.inner-button').forEach(b => b.classList.remove('active-inner'));
-      btn.classList.add('active-inner');
-      const enlaces = { 'DolemOS 11':'https://www.mediafire.com/file/52oefu4rrlqkutk/DolemOS11.iso/file','DolemOS 10':'https://www.mediafire.com/file/xax7ktv5n9fk96g/DolemOS10.iso/file','DolemOS10 LTSC 2021':'https://www.mediafire.com/file/fnujteq8g643z67/DolemOS10LTSC2021.iso/file','DolemOS10 LTSC 2019':'https://www.mediafire.com/file/xipppc8dkgsckiu/DolemOS10LTSC2019.iso/file','DolemOS11 LTSC':'https://www.mediafire.com/file/frln9crke66vytu/DolemOS11LTSC.iso/file','Carpeta de Opti':'https://www.mediafire.com/file/oys2l10siequids/Carpeta+De+Optimización.7z/file','Juegos Friv':'https://download938.mediafire.com/3mlsc9l8jtbgHSB2P4FakXIrsdK3SSfPTXNtYn9lcvhevujTBB16_JzuQAsbooVwVAEZE75zg57JeEp42vr6pUIojdDmlPAmHwfHR76vyqZwXi7jI0UmGPMacSpq-GbB0zZYX838q8xpz_NiRkHPkLCFLaFLIQH1DOIlzgHQul14/myow71jfeusgedz/JuegosFlash.rar'};
-      document.getElementById('downloadBtn').style.display = 'block';
-      document.getElementById('downloadBtn').onclick = () => window.location.href = enlaces[categoria];
-    }
-
-    // Stars
+    // Feedback stars
     let selectedStars = 0;
     document.querySelectorAll('.star').forEach(star => star.addEventListener('click', () => {
       selectedStars = +star.dataset.value;
@@ -156,12 +162,8 @@
       const text = document.getElementById('feedbackText').value.trim();
       if (!nick) return alert('Ingresa tu nickname.');
       if (!text || selectedStars === 0) return alert('Escribe reseña y selecciona estrellas.');
-      const payload = {
-        username: 'Dproject',
-        avatar_url: avatarUrl,
-        content: `**Nueva reseña**\n👤 Nick: ${nick}\n⭐️ Estrellas: ${selectedStars}\n📝 Comentario: ${text}`
-      };
-      fetch(webhookUrl, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) })
+      const payload = { username: 'Dproject', avatar_url: avatarUrl, content: `**Nueva reseña**\n👤 Nick: ${nick}\n⭐️ Estrellas: ${selectedStars}\n📝 Comentario: ${text}` };
+      fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
         .then(res => res.ok ? alert('¡Gracias por tu reseña!') : alert('Error al enviar reseña.'))
         .catch(() => alert('Error de conexión con Discord.'));
     });
