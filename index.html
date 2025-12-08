@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dolem Optimization WebSite</title>
   <link rel="icon" href="https://e7.pngegg.com/pngimages/598/963/png-clipart-black-logo-computer-icons-web-page-world-wide-web-thumbnail.png" type="image/png">
-  <!-- Fuente Poppins para legibilidad y estilo -->
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +36,6 @@
     .download-button { display: none; margin-top: 1.5rem; padding: 1rem 2rem; font-size: 1.125rem; border: none; border-radius: 0.625rem; background: #007bff; color: #fff; cursor: pointer; }
     .download-button:hover { transform: scale(1.03); }
 
-    /* Ocultar el botón de reseñas hasta después de la transición */
     #showFeedbackBtn { display: none; position: fixed; top: 20px; left: 20px; padding: 0.75rem 1.5rem; background: #28a745; color: #fff; border: none; border-radius: 0.75rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); z-index: 10000; }
     .feedback-section { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%; max-width: 400px; background: rgba(255,255,255,0.95); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: 10001; }
     .feedback-section h2 { margin-bottom: 1rem; font-size: 1.25rem; color: #333; }
@@ -98,7 +97,6 @@
       setTimeout(() => {
         document.getElementById('splashScreen').classList.add('fade-out');
         document.getElementById('mainContent').classList.add('show');
-        // Mostrar el botón de feedback tras la transición
         document.getElementById('showFeedbackBtn').style.display = 'block';
       }, 3500);
     });
@@ -151,14 +149,12 @@
       });
     }
 
-    // Feedback stars
     let selectedStars = 0;
     document.querySelectorAll('.star').forEach(star => star.addEventListener('click', () => {
       selectedStars = +star.dataset.value;
       document.querySelectorAll('.star').forEach(s => s.classList.toggle('selected', +s.dataset.value <= selectedStars));
     }));
 
-    // Send feedback
     document.getElementById('submitFeedback').addEventListener('click', () => {
       const nick = document.getElementById('nickname').value.trim();
       const text = document.getElementById('feedbackText').value.trim();
